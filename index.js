@@ -4,7 +4,7 @@ var io = require('socket.io')(http);
 
 let port = 3000
 let players = []
-let iterationInterval = 3000
+let iterationInterval = 200
 let iterationTimeout = setTimeout(sendIterate, iterationInterval)
 
 app.get('/', (req, res) => {
@@ -48,7 +48,7 @@ io.on('connection', (socket) => {
 
 function sendIterate(){
     
-    io.emit('iterate');
+    io.emit('iterate', iterationInterval);
     iterationTimeout = setTimeout(sendIterate, iterationInterval)
 }
 

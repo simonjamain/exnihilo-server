@@ -7,12 +7,14 @@ app.get('/', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-    socket.on('chat message', (msg) => {
-        console.log('message: ' + msg);
-        io.emit('chat message', msg);
+    socket.on('newPlayer', (color) => {
+        io.emit('newPlayer', color);
+    });
+    socket.on('newAction', (action) => {
+        io.emit('newAction', action);
     });
 });
 
-http.listen(19652, () => {
-  console.log('listening on *:19652');
+http.listen(3000, () => {
+  console.log('listening on *:3000');
 });

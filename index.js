@@ -27,7 +27,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('newPlayer', (color) => {
-        players.push(players);
+        players.push(color);
         io.emit('newPlayer', color);
         io.emit('allPlayers', players);
     });

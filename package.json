@@ -2,5 +2,8 @@
     "name": "exnihilo-server",
     "version": "0.0.1",
     "description": "exnihilo game server",
-    "dependencies": {}
+    "dependencies": {
+        "express": "^4.15.2",
+        "socket.io": "^2.3.0"
+    }
 }

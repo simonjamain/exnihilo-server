@@ -48,7 +48,7 @@ io.on('connection', (socket) => {
 
 function sendIterate(){
     
-    io.emit('iterate');
+    io.emit('iterate', iterationInterval);
     iterationTimeout = setTimeout(sendIterate, iterationInterval)
 }
 

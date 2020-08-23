@@ -146,14 +146,14 @@ class ActionEvent extends HistoryEvent {
 }
 
 class AmmunitionEvent extends HistoryEvent {
-    constructor(action){
+    constructor(){
         super()
         this.type = "ammunition"
     }
 }
 
 class PlayerEvent extends HistoryEvent {
-    constructor(action, playerColor, direction){
+    constructor(playerColor, direction){
         super()
         this.type = "player"
         this.playerColor = playerColor

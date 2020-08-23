@@ -6,7 +6,16 @@ let port = process.argv[2] || 3000
 let players = []
 let gameStartTime = Date.now()
 
-let iterationInterval = 900
+let size = {
+    rows : 40,
+    cols : 40
+}
+
+let newSpecialCellIntervalMin = 5000
+let newSpecialCellIntervalMax = 10000
+let newSpecialCellTimeout = setTimeout(sendSpecialCell, newSpecialCellIntervalMin + Math.random() * (newSpecialCellIntervalMax - newSpecialCellIntervalMin))
+
+let iterationInterval = 5000
 let iterationTimeout = setTimeout(sendIterate, iterationInterval)
 
 let newAmunitionInterval = 1800
@@ -89,8 +98,20 @@ function sendNewAmmunition(){
 function sendIterate(){
 
     history.push(new IterationEvent())
-    io.emit('iterate', iterationInterval);
+    io.emit('iterate', iterationInterval)
     iterationTimeout = setTimeout(sendIterate, iterationInterval)
+}
+
+function sendSpecialCell(){
+    const row = Math.floor(Math.random() * size.rows)
+    const col = Math.floor(Math.random() * size.cols)
+    const randNumber = Math.random()
+
+    specialCellEvent = new SpecialCellEvent(row, col, randNumber)
+    history.push(specialCellEvent)
+    io.emit('newSpecialCell', specialCellEvent);
+
+    newSpecialCellTimeout = setTimeout(sendSpecialCell, newSpecialCellIntervalMin + Math.random() * (newSpecialCellIntervalMax - newSpecialCellIntervalMin))
 }
 
 class HistoryEvent {
@@ -106,6 +127,16 @@ class IterationEvent extends HistoryEvent {
     }
 }
 
+class SpecialCellEvent extends HistoryEvent {
+    constructor(row, col, randNumber){
+        super()
+        this.type = "specialCell"
+        this.row = row
+        this.col = col
+        this.randNumber = randNumber
+    }
+}
+
 class ActionEvent extends HistoryEvent {
     constructor(action){
         super()
@@ -115,14 +146,14 @@ class ActionEvent extends HistoryEvent {
 }
 
 class AmmunitionEvent extends HistoryEvent {
-    constructor(action){
+    constructor(){
         super()
         this.type = "ammunition"
     }
 }
 
 class PlayerEvent extends HistoryEvent {
-    constructor(action, playerColor, direction){
+    constructor(playerColor, direction){
         super()
         this.type = "player"
         this.playerColor = playerColor

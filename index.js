@@ -133,6 +133,7 @@ class SpecialCellEvent extends HistoryEvent {
         this.type = "specialCell"
         this.row = row
         this.col = col
+        this.randNumber
     }
 }
 

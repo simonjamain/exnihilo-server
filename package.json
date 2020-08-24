@@ -8,7 +8,7 @@
         "socket.io": "^2.3.0"
     },
     "scripts": {
-        "start": "node index.js",
-        "start-forever": "forever start index.js"
+        "start": "node exNihiloServer.js",
+        "start-forever": "forever start exNihiloServer.js"
     }
 }

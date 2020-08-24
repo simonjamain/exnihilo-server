@@ -13,3 +13,8 @@ You can simply start the server by running ```npm run start```
 OR
 
 If you want it to run indefinitely, start the server with ```sudo npm run start-forever``` (you need forever installed, see Installation)
+
+## Port
+
+Default port is 3000, you can change the server port by specifying it at the end of start command like :
+```npm run start 80``` OR ```npm run start-forever 80```

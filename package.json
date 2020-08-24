@@ -8,7 +8,6 @@
         "socket.io": "^2.3.0"
     },
     "scripts": {
-        "start": "forever start index.js",
-        "install": "sudo npm install forever -g"
+        "start-forever": "forever start index.js"
     }
 }
